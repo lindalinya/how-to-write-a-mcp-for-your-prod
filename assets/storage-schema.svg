@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="s10" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="760" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">本地存储的分组结构</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">SQLite 里其实只有三类数据：镜像、知识、审计</text>
+
+  <!-- 组标题 -->
+  <g text-anchor="middle" font-size="13" font-weight="700">
+    <rect x="30" y="84" width="300" height="34" rx="8" fill="#eff6ff"/>
+    <text x="180" y="106" fill="#1e3a8a">① 资源镜像</text>
+
+    <rect x="350" y="84" width="300" height="34" rx="8" fill="#f0fdf4"/>
+    <text x="500" y="106" fill="#14532d">② 已验证知识</text>
+
+    <rect x="670" y="84" width="300" height="34" rx="8" fill="#fff7ed"/>
+    <text x="820" y="106" fill="#7c2d12">③ 候选与审计</text>
+  </g>
+
+  <!-- 镜像组 -->
+  <rect x="30" y="136" width="300" height="120" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="50" y="162" font-size="13" font-weight="700" fill="#1e3a8a">resources</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="50" y="184">id · resource_type · data(JSON)</text>
+    <text x="50" y="202">synced_at · updated_at</text>
+    <text x="50" y="220">PK (resource_type, id)</text>
+  </g>
+  <text x="310" y="246" text-anchor="end" font-size="9.5" fill="#94a3b8">服务器资源的本地副本</text>
+
+  <rect x="30" y="276" width="300" height="104" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="50" y="302" font-size="13" font-weight="700" fill="#1e3a8a">resources_fts</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="50" y="324">id · resource_type · content</text>
+    <text x="50" y="342">tokenize = 'trigram'</text>
+    <text x="50" y="362">FTS5 虚拟表</text>
+  </g>
+
+  <rect x="30" y="400" width="300" height="104" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="50" y="426" font-size="13" font-weight="700" fill="#1e3a8a">sync_state</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="50" y="448">resource_type · last_cursor</text>
+    <text x="50" y="466">total_count</text>
+    <text x="50" y="484">last_attempt_complete</text>
+  </g>
+
+  <!-- 连线 -->
+  <path d="M 180 256 L 180 274" stroke="#3b82f6" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+  <path d="M 180 380 L 180 398" stroke="#3b82f6" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+  <text x="188" y="270" font-size="9" fill="#3b82f6">id</text>
+
+  <!-- 知识组 -->
+  <rect x="350" y="136" width="300" height="130" rx="10" fill="#ffffff" stroke="#86efac" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="370" y="162" font-size="13" font-weight="700" fill="#14532d">search_learnings</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="370" y="184">query_pattern · query_entities</text>
+    <text x="370" y="202">resource_type · resource_id</text>
+    <text x="370" y="220">source · confidence</text>
+    <text x="370" y="238">last_observed_at · notes</text>
+  </g>
+
+  <rect x="350" y="286" width="300" height="120" rx="10" fill="#ffffff" stroke="#86efac" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="370" y="312" font-size="13" font-weight="700" fill="#14532d">search_patterns</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="370" y="334">query_template</text>
+    <text x="370" y="352">resource_template</text>
+    <text x="370" y="370">strategy · entity_kind</text>
+    <text x="370" y="388">example_query / example_resource</text>
+  </g>
+
+  <rect x="350" y="426" width="300" height="120" rx="10" fill="#ffffff" stroke="#86efac" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="370" y="452" font-size="13" font-weight="700" fill="#14532d">learning_playbooks</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="370" y="474">query_family (UNIQUE)</text>
+    <text x="370" y="492">playbook_json · notes_text</text>
+    <text x="370" y="510">source · confidence</text>
+    <text x="370" y="528">last_observed_at</text>
+  </g>
+
+  <!-- 候选与审计 -->
+  <rect x="670" y="136" width="300" height="140" rx="10" fill="#ffffff" stroke="#fdba74" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="690" y="162" font-size="13" font-weight="700" fill="#7c2d12">learn_candidates</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="690" y="184">class · payload</text>
+    <text x="690" y="202">derivation_signature (UNIQUE)</text>
+    <text x="690" y="220">sightings · status</text>
+    <text x="690" y="238">status ∈ open/confirmed/</text>
+    <text x="690" y="256">　　　　rejected/expired</text>
+  </g>
+
+  <rect x="670" y="306" width="300" height="120" rx="10" fill="#ffffff" stroke="#fdba74" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="690" y="332" font-size="13" font-weight="700" fill="#7c2d12">learn_events</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="690" y="354">ts · event · surface</text>
+    <text x="690" y="372">query_family_hash</text>
+    <text x="690" y="390">matched_row_id · entity_match</text>
+    <text x="690" y="408">事件有 TTL 清理</text>
+  </g>
+
+  <rect x="670" y="446" width="300" height="104" rx="10" fill="#ffffff" stroke="#fdba74" stroke-width="1.4" filter="url(#s10)"/>
+  <text x="690" y="472" font-size="13" font-weight="700" fill="#7c2d12">entity_lookups</text>
+  <g font-size="10.5" fill="#475569" font-family="'SFMono-Regular', Consolas, monospace">
+    <text x="690" y="494">kind · canonical · value</text>
+    <text x="690" y="512">source（含 seeded 预置词表）</text>
+    <text x="690" y="530">PK (kind, canonical, value)</text>
+  </g>
+
+  <!-- 底部 -->
+  <rect x="30" y="596" width="940" height="70" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="50" y="622" font-size="12" font-weight="700" fill="#0f172a">两组之间的关系</text>
+  <text x="50" y="646" font-size="11" fill="#475569">learn_candidates 经 confirm 后，payload 才写入 search_learnings / learning_playbooks；reject 则只留墓碑。</text>
+
+  <text x="500" y="700" text-anchor="middle" font-size="11" fill="#94a3b8">多租户：expected_identity 与 observed_identity 不一致时拒绝使用本地库</text>
+  <text x="500" y="722" text-anchor="middle" font-size="10.5" fill="#94a3b8">实测还包含 learn_recall_misses（按需创建）与若干索引</text>
+</svg>

@@ -14,6 +14,8 @@
 
 ## 2. 实测表结构
 
+![存储结构](../assets/storage-schema.svg)
+
 ### 2.1 资源镜像
 
 ```sql

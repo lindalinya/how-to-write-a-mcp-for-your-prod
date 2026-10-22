@@ -146,6 +146,8 @@ CREATE TABLE entity_lookups (
 
 ## 4. 召回算法（实测规则）
 
+![召回判定](../assets/recall-decision.svg)
+
 二进制里的原文：
 
 > Returns prior learnings matching the supplied query by **token-set overlap (Jaccard >= 0.6)** plus entity-aware validation. If `found=true` AND `results[0].entity_match == "exact"` AND `confidence >= 2`, the LLM can skip discovery and go straight to live fetch.

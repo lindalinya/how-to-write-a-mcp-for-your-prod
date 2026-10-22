@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <marker id="a12g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="a12r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+    <filter id="s12" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="700" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">召回（recall）的判定链路</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">三道闸门全过，才允许跳过重新发现</text>
+
+  <!-- 1 query -->
+  <rect x="400" y="88" width="200" height="52" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4" filter="url(#s12)"/>
+  <text x="500" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">用户问题</text>
+  <text x="500" y="130" text-anchor="middle" font-size="10.5" fill="#3b82f6">原样传入，不拼 shell</text>
+
+  <path d="M 500 140 L 500 168" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a12)"/>
+
+  <!-- 2 normalize -->
+  <rect x="400" y="172" width="200" height="52" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3" filter="url(#s12)"/>
+  <text x="500" y="196" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">归一化 + 分词</text>
+  <text x="500" y="214" text-anchor="middle" font-size="10.5" fill="#64748b">小写 · 去标点 · token 集合</text>
+
+  <path d="M 500 224 L 500 252" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a12)"/>
+
+  <!-- 3 empty check -->
+  <polygon points="500,256 610,300 500,344 390,300" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5" filter="url(#s12)"/>
+  <text x="500" y="296" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">库是空的？</text>
+  <text x="500" y="314" text-anchor="middle" font-size="9.5" fill="#b45309">无已存知识</text>
+
+  <path d="M 610 300 L 700 300" stroke="#dc2626" stroke-width="1.6" fill="none" marker-end="url(#a12r)"/>
+  <text x="655" y="292" text-anchor="middle" font-size="10.5" fill="#dc2626">是</text>
+  <rect x="704" y="272" width="230" height="56" rx="9" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.2"/>
+  <text x="819" y="294" text-anchor="middle" font-size="11.5" font-weight="600" fill="#991b1b">本会话短路</text>
+  <text x="819" y="314" text-anchor="middle" font-size="10" fill="#b91c1c">不再反复召回</text>
+
+  <path d="M 500 344 L 500 372" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a12)"/>
+  <text x="512" y="364" font-size="10.5" fill="#64748b">否</text>
+
+  <!-- 4 retrieve -->
+  <rect x="380" y="376" width="240" height="52" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3" filter="url(#s12)"/>
+  <text x="500" y="400" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">候选检索</text>
+  <text x="500" y="418" text-anchor="middle" font-size="10.5" fill="#64748b">query_pattern 精确 / 包含匹配</text>
+
+  <!-- 分叉到三道闸门 -->
+  <path d="M 500 428 L 500 452" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 220 452 L 780 452" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <g stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a12)">
+    <path d="M 220 452 L 220 486"/>
+    <path d="M 500 452 L 500 486"/>
+    <path d="M 780 452 L 780 486"/>
+  </g>
+
+  <!-- 三个闸门 -->
+  <g filter="url(#s12)">
+    <rect x="90" y="490" width="260" height="86" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4"/>
+    <rect x="370" y="490" width="260" height="86" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.4"/>
+    <rect x="650" y="490" width="260" height="86" rx="10" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.4"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="220" y="518" font-size="12.5" font-weight="700" fill="#1e3a8a">① Jaccard ≥ 0.6</text>
+    <text x="220" y="540" font-size="10.5" fill="#3b82f6">词集合重合度</text>
+    <text x="220" y="560" font-size="10" fill="#64748b">防止语义相近但不相干</text>
+
+    <text x="500" y="518" font-size="12.5" font-weight="700" fill="#14532d">② entity_match = exact</text>
+    <text x="500" y="540" font-size="10.5" fill="#16a34a">实体字典校验</text>
+    <text x="500" y="560" font-size="10" fill="#64748b">防止时间/人名指代错位</text>
+
+    <text x="780" y="518" font-size="12.5" font-weight="700" fill="#4c1d95">③ confidence ≥ 2</text>
+    <text x="780" y="540" font-size="10.5" fill="#7c3aed">至少验证过一轮</text>
+    <text x="780" y="560" font-size="10" fill="#64748b">防止一次偶然命中被当规律</text>
+  </g>
+
+  <!-- 结果 -->
+  <path d="M 220 576 L 220 604" stroke="#16a34a" stroke-width="1.6" fill="none"/>
+  <path d="M 500 576 L 500 604" stroke="#16a34a" stroke-width="1.6" fill="none"/>
+  <path d="M 780 576 L 780 604" stroke="#16a34a" stroke-width="1.6" fill="none"/>
+
+  <rect x="90" y="608" width="820" height="56" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.3"/>
+  <text x="500" y="632" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">三条全中 → 可以跳过发现，直接按资源 ID 取数</text>
+  <text x="500" y="652" text-anchor="middle" font-size="10.5" fill="#16a34a">任意一条不满足 → 仍需正常探索；完全没命中 → 记录 recall_miss</text>
+
+  <!-- 左侧注记 -->
+  <text x="60" y="466" font-size="10.5" fill="#94a3b8">全部满足</text>
+  <text x="60" y="482" font-size="10.5" fill="#94a3b8">才放行</text>
+</svg>

@@ -30,18 +30,7 @@
 
 ## 2. 输出管线的三段式
 
-```
-业务结果（结构体）
-      │
-      ▼
-  投影（projection）     --select / --compact
-      │
-      ▼
-  渲染（render）         table / json / csv / plain / quiet
-      │
-      ▼
-  投递（deliver）        stdout / file / webhook
-```
+![输出管线](../assets/output-pipeline.svg)
 
 **为什么这么分**：
 

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="al" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+    </marker>
+    <filter id="s11" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="640" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">MCP 的一次完整会话</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">握手 → 发现工具 → 调用工具，全部是 JSON-RPC</text>
+
+  <!-- 参与者 -->
+  <rect x="150" y="90" width="200" height="52" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4" filter="url(#s11)"/>
+  <text x="250" y="122" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1e3a8a">AI 客户端</text>
+
+  <rect x="650" y="90" width="200" height="52" rx="10" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.4" filter="url(#s11)"/>
+  <text x="750" y="122" text-anchor="middle" font-size="13.5" font-weight="700" fill="#4c1d95">mymcp</text>
+
+  <!-- 生命线 -->
+  <line x1="250" y1="142" x2="250" y2="590" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <line x1="750" y1="142" x2="750" y2="590" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6 5"/>
+
+  <!-- 1 initialize -->
+  <line x1="250" y1="178" x2="742" y2="178" stroke="#2563eb" stroke-width="1.8" marker-end="url(#ar)"/>
+  <text x="500" y="170" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">initialize</text>
+  <text x="500" y="196" text-anchor="middle" font-size="10.5" fill="#64748b">protocolVersion · clientInfo · capabilities</text>
+
+  <!-- 2 result -->
+  <line x1="750" y1="232" x2="258" y2="232" stroke="#16a34a" stroke-width="1.8" marker-end="url(#al)"/>
+  <text x="500" y="224" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">result</text>
+  <text x="500" y="250" text-anchor="middle" font-size="10.5" fill="#64748b">serverInfo · protocolVersion · capabilities: [tools]</text>
+
+  <!-- 3 initialized -->
+  <line x1="250" y1="286" x2="742" y2="286" stroke="#2563eb" stroke-width="1.8" marker-end="url(#ar)"/>
+  <text x="500" y="278" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">notifications/initialized</text>
+  <text x="500" y="304" text-anchor="middle" font-size="10.5" fill="#64748b">单向通知，无响应</text>
+
+  <!-- 4 tools/list -->
+  <line x1="250" y1="344" x2="742" y2="344" stroke="#2563eb" stroke-width="1.8" marker-end="url(#ar)"/>
+  <text x="500" y="336" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">tools/list</text>
+
+  <!-- 5 tools result -->
+  <line x1="750" y1="398" x2="258" y2="398" stroke="#16a34a" stroke-width="1.8" marker-end="url(#al)"/>
+  <text x="500" y="390" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">result</text>
+  <text x="500" y="416" text-anchor="middle" font-size="10.5" fill="#64748b">118 个工具：name · description · inputSchema · annotations</text>
+
+  <!-- 6 tools/call -->
+  <line x1="250" y1="456" x2="742" y2="456" stroke="#2563eb" stroke-width="1.8" marker-end="url(#ar)"/>
+  <text x="500" y="448" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">tools/call</text>
+  <text x="500" y="474" text-anchor="middle" font-size="10.5" fill="#64748b">name="dashboards_list" · arguments={...}</text>
+
+  <!-- 7 call result -->
+  <line x1="750" y1="522" x2="258" y2="522" stroke="#16a34a" stroke-width="1.8" marker-end="url(#al)"/>
+  <text x="500" y="514" text-anchor="middle" font-size="12" font-weight="600" fill="#14532d">result</text>
+  <text x="500" y="540" text-anchor="middle" font-size="10.5" fill="#64748b">content: [{type:"text", text:"..."}] · isError</text>
+
+  <!-- 右侧备注 -->
+  <rect x="820" y="160" width="160" height="240" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="838" y="186" font-size="11.5" font-weight="700" fill="#0f172a">要点</text>
+  <g font-size="10.5" fill="#475569">
+    <text x="838" y="212">· 能力必须如实声明</text>
+    <text x="838" y="236">· 工具定义在列表</text>
+    <text x="838" y="254">　时就固定</text>
+    <text x="838" y="278">· 调用参数按 schema</text>
+    <text x="838" y="296">　校验</text>
+    <text x="838" y="320">· isError 区分业务</text>
+    <text x="838" y="338">　失败与协议错误</text>
+  </g>
+
+  <!-- 底部 -->
+  <text x="500" y="600" text-anchor="middle" font-size="11" fill="#94a3b8">传输层：stdio（默认）或 streamable HTTP（非回环必须 TLS）</text>
+</svg>

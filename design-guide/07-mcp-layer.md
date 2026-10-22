@@ -6,6 +6,8 @@
 
 ## 1. 协议基础
 
+![MCP 会话时序](../assets/mcp-handshake.svg)
+
 实测握手：
 
 ```

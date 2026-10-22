@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <filter id="s9" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="560" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">输出管线的三段式</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">业务命令只返回结构体，其余全部由输出层负责</text>
+
+  <!-- 四个阶段 -->
+  <g filter="url(#s9)">
+    <rect x="40" y="96" width="190" height="86" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+    <rect x="290" y="96" width="190" height="86" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4"/>
+    <rect x="540" y="96" width="190" height="86" rx="12" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.4"/>
+    <rect x="790" y="96" width="170" height="86" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.4"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="135" y="128" font-size="13.5" font-weight="700" fill="#0f172a">业务结果</text>
+    <text x="135" y="150" font-size="11" fill="#64748b">结构体 / 切片</text>
+    <text x="135" y="168" font-size="10.5" fill="#94a3b8">命令只负责拿到它</text>
+
+    <text x="385" y="128" font-size="13.5" font-weight="700" fill="#1e3a8a">① 投影</text>
+    <text x="385" y="150" font-size="11" fill="#3b82f6">--select / --compact</text>
+    <text x="385" y="168" font-size="10.5" fill="#64748b">决定返回哪些字段</text>
+
+    <text x="635" y="128" font-size="13.5" font-weight="700" fill="#4c1d95">② 渲染</text>
+    <text x="635" y="150" font-size="11" fill="#7c3aed">json / table / csv</text>
+    <text x="635" y="168" font-size="10.5" fill="#64748b">决定长成什么样</text>
+
+    <text x="875" y="128" font-size="13.5" font-weight="700" fill="#14532d">③ 投递</text>
+    <text x="875" y="150" font-size="11" fill="#16a34a">stdout / file / webhook</text>
+    <text x="875" y="168" font-size="10.5" fill="#64748b">决定送到哪里</text>
+  </g>
+
+  <g stroke="#64748b" stroke-width="1.8" marker-end="url(#a9)">
+    <line x1="230" y1="139" x2="284" y2="139"/>
+    <line x1="480" y1="139" x2="534" y2="139"/>
+    <line x1="730" y1="139" x2="784" y2="139"/>
+  </g>
+
+  <!-- 选项展开 -->
+  <g>
+    <!-- 投影 -->
+    <rect x="290" y="216" width="190" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+    <text x="385" y="240" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e40af">可选值</text>
+    <g font-size="11" fill="#475569">
+      <text x="306" y="266">--select id,name,status</text>
+      <text x="306" y="288">--compact（关键字段）</text>
+      <text x="306" y="310">--select a,b.c（嵌套）</text>
+    </g>
+
+    <!-- 渲染 -->
+    <rect x="540" y="216" width="190" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+    <text x="635" y="240" text-anchor="middle" font-size="11.5" font-weight="600" fill="#4c1d95">可选值</text>
+    <g font-size="11" fill="#475569">
+      <text x="556" y="266">--json（脚本 / AI）</text>
+      <text x="556" y="288">--csv / --plain / --quiet</text>
+      <text x="556" y="310">默认：TTY 彩色表格</text>
+    </g>
+
+    <!-- 投递 -->
+    <rect x="790" y="216" width="170" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.2"/>
+    <text x="875" y="240" text-anchor="middle" font-size="11.5" font-weight="600" fill="#14532d">可选值</text>
+    <g font-size="11" fill="#475569">
+      <text x="806" y="266">--deliver stdout</text>
+      <text x="806" y="288">--deliver file:out.json</text>
+      <text x="806" y="310">--deliver webhook:...</text>
+    </g>
+  </g>
+
+  <!-- 底部约定 -->
+  <rect x="40" y="376" width="920" height="66" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.2"/>
+  <text x="62" y="404" font-size="12.5" font-weight="700" fill="#991b1b">硬性约定</text>
+  <text x="62" y="428" font-size="11.5" fill="#b91c1c">stdout 只放数据；进度、警告、错误一律走 stderr。这样才能放心地写 mycli ... | jq .</text>
+
+  <!-- 退出码 -->
+  <text x="500" y="490" text-anchor="middle" font-size="12.5" fill="#64748b">退出码：0 成功 · 1 运行错误 · 2 用法错误 / 无匹配 · 3 认证失败 · 4 权限不足 · 6 版本不兼容 · 7 限流</text>
+  <text x="500" y="516" text-anchor="middle" font-size="11" fill="#94a3b8">--agent 一次性打开 --json --compact --no-input --no-color</text>
+</svg>
