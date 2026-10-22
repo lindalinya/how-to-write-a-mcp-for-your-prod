@@ -18,7 +18,7 @@
 服务端信息：
 
 ```json
-{"name": "wyn-mcp", "version": "0.2.12", "protocolVersion": "2024-11-05"}
+{"name": "mymcp", "version": "0.2.12", "protocolVersion": "2024-11-05"}
 ```
 
 能力声明只有 `tools`（没有 resources / prompts / sampling）。
@@ -115,7 +115,7 @@ http + 非回环    → 必须 TLS，否则拒绝启动
 ## 4. 工具命名
 
 ```
-CLI:  wyn-cli datasets native query-data
+CLI:  mycli datasets native query-data
 MCP:  datasets_native_query_data
 ```
 
@@ -141,7 +141,7 @@ MCP 工具定义的核心是 `inputSchema`（JSON Schema）。
 ```json
 {
   "name": "dashboards_create",
-  "description": "Create a new Wyn Dashboard (.dbd) from a JSON/.dbd file, stdin, or blank template",
+  "description": "Create a new Dashboard (.dbd) from a JSON/.dbd file, stdin, or blank template",
   "inputSchema": {
     "type": "object",
     "properties": {
@@ -321,14 +321,14 @@ MCP 的工具调用结果里有 `isError` 字段。
 好的例子：
 
 ```
-Create a new Wyn Dashboard (.dbd) from a JSON/.dbd file, stdin, or blank template
+Create a new Dashboard (.dbd) from a JSON/.dbd file, stdin, or blank template
 ```
 
 拆解：
 
 ```
 动词     Create
-对象     a new Wyn Dashboard (.dbd)
+对象     a new Dashboard (.dbd)
 输入形式 from a JSON/.dbd file, stdin, or blank template
 ```
 

@@ -11,7 +11,7 @@
               │                         │                         │
               ▼                         ▼                         ▼
     ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-    │  wyn-cli.exe     │    │  wyn-mcp.exe     │    │  agent-context   │
+    │  mycli.exe     │    │  mymcp.exe     │    │  agent-context   │
     │  524 个命令节点   │    │  118 个 MCP 工具  │    │  272KB JSON      │
     │  人 / 脚本        │    │  AI 客户端        │    │  AI 首次接入      │
     └────────┬─────────┘    └────────┬─────────┘    └────────┬─────────┘
@@ -26,16 +26,16 @@
                                │
                     ┌──────────┴──────────┐
                     ▼                     ▼
-              Wyn REST API         本地 SQLite
+              Target REST API         本地 SQLite
 ```
 
 **核心事实**（buildinfo 实测）：
 
 ```
-wyn-cli.exe   path = wyn-cli-pp-cli/cmd/wyn-cli-pp-cli
-wyn-mcp.exe   path = wyn-cli-pp-cli/cmd/wyn-cli-pp-mcp
-              mod  = wyn-cli-pp-cli
-wynlauncher   mod  = wynlauncher          （独立模块，只共享配置文件）
+mycli.exe   path = mycli/cmd/mycli
+mymcp.exe   path = mycli/cmd/mymcp
+              mod  = mycli
+launcher   mod  = launcher          （独立模块，只共享配置文件）
 ```
 
 前两个是同一个模块的两个入口，**不是进程间调用**。
@@ -45,17 +45,17 @@ wynlauncher   mod  = wynlauncher          （独立模块，只共享配置文�
 ## 2. 内部包边界
 
 ```
-wyn-cli-pp-cli/
+mycli/
 ├── cmd/
-│   ├── wyn-cli-pp-cli/        入口：参数解析 → 执行 → 输出
-│   └── wyn-cli-pp-mcp/        入口：注册工具 → 起 transport
+│   ├── mycli/        入口：参数解析 → 执行 → 输出
+│   └── mymcp/        入口：注册工具 → 起 transport
 └── internal/
     ├── cli/                   每个叶子命令一个包（admin_printers_list/ ...）
     ├── client/                HTTP、重试、缓存、限流、上传下载
     ├── store/                 SQLite schema、查询、FTS、迁移
     ├── learn/                 召回、候选、playbook、事件
     ├── compat/                版本探测、端点门控
-    ├── config/                ~/.wyninstances.yml 读取与校验
+    ├── config/                ~/.instances.yml 读取与校验
     ├── platform/              profile、doctor、限流预算、会话
     └── cliutil/               路径、凭证、原子写、输出辅助
 ```
@@ -79,7 +79,7 @@ cli  ──►  client / store / learn / compat / config / platform / cliutil
 
 ## 3. 一次命令请求的完整生命周期
 
-以 `wyn-cli dashboards list --agent` 为例：
+以 `mycli dashboards list --agent` 为例：
 
 ```
 1. 参数解析
@@ -87,7 +87,7 @@ cli  ──►  client / store / learn / compat / config / platform / cliutil
    解析全局 flags：--instance / --server-version / --json ...
 
 2. 环境装配
-   config.Load()            读 ~/.wyninstances.yml（找不到就 fallback）
+   config.Load()            读 ~/.instances.yml（找不到就 fallback）
    cliutil.LoadCredentials  取 token（配置 / 环境变量 / 提示）
    platform.Session         绑定 client-profile、租户身份
 
@@ -166,10 +166,10 @@ sync  → client → HTTP → store（resources + fts）
 
 | 用途 | Windows 实际路径 |
 |---|---|
-| 配置 | `C:\Users\<u>\.config\wyn-cli` |
-| 数据 | `C:\Users\<u>\.local\share\wyn-cli`（`data.db`） |
-| 状态 | `C:\Users\<u>\.local\state\wyn-cli` |
-| 缓存 | `C:\Users\<u>\.cache\wyn-cli` |
+| 配置 | `C:\Users\<u>\.config\mycli` |
+| 数据 | `C:\Users\<u>\.local\share\mycli`（`data.db`） |
+| 状态 | `C:\Users\<u>\.local\state\mycli` |
+| 缓存 | `C:\Users\<u>\.cache\mycli` |
 
 遵循 XDG 约定，在 Windows 上也用同样的相对结构。
 
@@ -183,7 +183,7 @@ sync  → client → HTTP → store（resources + fts）
 
 ## 6. 依赖选择（实测）
 
-`wyn-mcp` 只有 22 个第三方模块：
+`mymcp` 只有 22 个第三方模块：
 
 | 类别 | 依赖 | 说明 |
 |---|---|---|

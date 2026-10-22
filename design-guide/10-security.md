@@ -11,9 +11,9 @@
 
 | 资产 | 位置 | 泄露后果 |
 |---|---|---|
-| API Token | `~/.wyninstances.yml`、环境变量 | 完全控制账号 |
+| API Token | `~/.instances.yml`、环境变量 | 完全控制账号 |
 | 密码 | 同上 | 同上 |
-| 本地镜像数据 | `~/.local/share/wyn-cli/data.db` | 业务数据外泄 |
+| 本地镜像数据 | `~/.local/share/mycli/data.db` | 业务数据外泄 |
 | 服务器写权限 | 进程内存 | 数据被篡改/删除 |
 | 学习库 | 同 data.db | 污染 AI 的后续判断 |
 
@@ -62,7 +62,7 @@ E. 供应链
 
 ### 3.1 现状（实测，需要改进）
 
-`~/.wyninstances.yml` 里：
+`~/.instances.yml` 里：
 
 ```yaml
 users:
@@ -79,7 +79,7 @@ users:
 
 | 方案 | 成本 | 适用 |
 |---|---|---|
-| 环境变量优先（`WYN_TOKEN`） | 低 | 所有场景 |
+| 环境变量优先（`MYCLI_TOKEN`） | 低 | 所有场景 |
 | 操作系统密钥环（Keychain/DPAPI/libsecret） | 中 | 单人开发机 |
 | 只存"凭证引用"，真实值在外部 | 中 | 多环境 |
 | 文件权限收紧到 0600 | 低 | 兜底 |
@@ -88,7 +88,7 @@ users:
 
 - **必须**支持从环境变量读凭证，且优先级高于配置文件。
 - **必须**在保存凭证时使用原子写 + 0600。
-- **应该**提供"凭证引用"模式：配置里只写 `ref:env:WYN_TOKEN`。
+- **应该**提供"凭证引用"模式：配置里只写 `ref:env:MYCLI_TOKEN`。
 - **禁止**把凭证写进日志、错误、`--dry-run` 输出、`--deliver` 的 URL。
 
 ### 3.3 凭证泄露检测
@@ -97,8 +97,8 @@ users:
 
 ```
 ErrPlaceholderCredential
-Set it with: echo "$TOKEN" | wyn-cli auth set-token
-or export WYN_TOKEN="your-token-here"
+Set it with: echo "$TOKEN" | mycli auth set-token
+or export MYCLI_TOKEN="your-token-here"
 ```
 
 **规范**：
@@ -259,7 +259,7 @@ AI 把错误映射写进学习库，后续所有会话都受影响。
 
 | 文件 | 权限要求 |
 |---|---|
-| `~/.wyninstances.yml` | 0600 |
+| `~/.instances.yml` | 0600 |
 | `data.db` | 0600 |
 | 缓存目录 | 0700 |
 | 导出文件 | 默认权限，但**不得**包含凭证 |

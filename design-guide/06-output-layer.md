@@ -202,7 +202,7 @@ stderr  → 日志、进度、警告、错误
 {
   "error": {
     "kind": "version",
-    "message": "endpoint requires Wyn 10.0",
+    "message": "endpoint requires v10.0",
     "hint": "re-run with --server-version 10.0 or upgrade the server",
     "endpoint": "chat.analysis"
   }

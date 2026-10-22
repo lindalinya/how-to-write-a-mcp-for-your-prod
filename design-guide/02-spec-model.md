@@ -41,7 +41,7 @@ group: dashboards
 action: create
 method: POST
 path: /api/v2/dashboards
-summary: Create a new Wyn Dashboard (.dbd)
+summary: Create a new Dashboard (.dbd)
 description: |
   Accepts a .dbd JSON document from a file or stdin.
 
@@ -87,7 +87,7 @@ compat:
 
 | 场合 | 规则 | 例子 |
 |---|---|---|
-| CLI 命令 | kebab-case，空格分隔层级 | `wyn-cli datasets native query-data` |
+| CLI 命令 | kebab-case，空格分隔层级 | `mycli datasets native query-data` |
 | 端点 ID | `资源.动作`，点号 | `datasets.native_query_data` |
 | MCP 工具 | 下划线拼接 | `datasets_native_query_data` |
 | Go 包名 | 下划线拼接 | `datasets_native_query_data` |
@@ -219,7 +219,7 @@ DELETE  26   → 删除
 
 实测兼容描述：
 
-> Compatible with Wyn Enterprise 9.1 (312/319 endpoints available; 7 Wyn 10+ endpoints gated)
+> Compatible with v9.1 (312/319 endpoints available; 7 v10+ endpoints gated)
 
 **规范**：
 
@@ -301,8 +301,8 @@ endpoints:
 生成结果应该是：
 
 ```
-wyn-cli dashboards list --keyword sales
-wyn-cli dashboards delete <id>
+mycli dashboards list --keyword sales
+mycli dashboards delete <id>
 MCP: dashboards_list / dashboards_delete
 ```
 

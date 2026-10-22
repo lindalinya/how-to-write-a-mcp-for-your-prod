@@ -233,7 +233,7 @@ tenant artifact conflict: --%s must use the selected client profile path
 - **应该**把"数据新不新"做成可查询的状态，而不是靠用户猜：
 
 ```
-wyn-cli workflow status     # 显示每个资源最后同步时间
+mycli workflow status     # 显示每个资源最后同步时间
 ```
 
 ---
@@ -268,7 +268,7 @@ rows, err := db.QueryContext(ctx, userSQL)
 
 - **应该**对超大字段做截断或跳过（比如图片 base64）
 - **应该**定期 `VACUUM`（但要避开高峰期）
-- **必须**让用户能一键清空：`wyn-cli sync --purge` 或删库重建
+- **必须**让用户能一键清空：`mycli sync --purge` 或删库重建
 - **可以**按资源类型分库，避免单文件过大
 
 ---

@@ -12,8 +12,8 @@
 38 个顶层命令按用途分成四组（`--help` 里的分组标题）：
 
 ```
-Wyn BI & Content Commands        11 个   dashboards / reports / datasets ...
-Wyn Admin & Platform Commands     8 个   admin / identity / scheduler ...
+BI & Content Commands        11 个   dashboards / reports / datasets ...
+Admin & Platform Commands     8 个   admin / identity / scheduler ...
 Instance, Auth & Local Store      9 个   auth / instance / sync / search ...
 Agent & CLI Utility Commands     10 个   agent-context / api / which / profile ...
 ```
@@ -29,9 +29,9 @@ Agent & CLI Utility Commands     10 个   agent-context / api / which / profile 
 实测典型结构：
 
 ```
-wyn-cli dashboards list                     ← 2 层叶子
-wyn-cli datasets native query-data          ← 3 层叶子
-wyn-cli admin knowledge-base search         ← 3 层叶子
+mycli dashboards list                     ← 2 层叶子
+mycli datasets native query-data          ← 3 层叶子
+mycli admin knowledge-base search         ← 3 层叶子
 ```
 
 **规范**：
@@ -175,10 +175,10 @@ profile delete <name>   删除
 ### 入口 B：`which <自然语言>`（人 + AI）
 
 ```
-wyn-cli which "stale tickets"
-wyn-cli which "bottleneck"
-wyn-cli which --limit 1 "send message"
-wyn-cli which                    # 列出完整能力索引
+mycli which "stale tickets"
+mycli which "bottleneck"
+mycli which --limit 1 "send message"
+mycli which                    # 列出完整能力索引
 ```
 
 实测退出码规范：
@@ -215,7 +215,7 @@ wyn-cli which                    # 列出完整能力索引
 
 - **应该**提供两个逃生口：
   - 按**接口名**浏览（`api <interface>`）
-  - 按**端点 ID** 直接执行（MCP 的 `wyn-cli_execute`）
+  - 按**端点 ID** 直接执行（MCP 的 `mycli_execute`）
 - **必须**让逃生口也走同一套认证、限流、错误处理，不能绕开安全层。
 
 ---

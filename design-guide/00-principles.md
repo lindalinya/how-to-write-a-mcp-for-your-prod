@@ -1,6 +1,6 @@
 # 00 - 设计原则
 
-十条贯穿 `wyn-cli` / `wyn-mcp` 的决策。每条都先讲**问题**，再讲**这套系统怎么解**，最后给**反例**。
+十条贯穿 `mycli` / `mymcp` 的决策。每条都先讲**问题**，再讲**这套系统怎么解**，最后给**反例**。
 
 ---
 
@@ -98,7 +98,7 @@ pp:path     = "/api/v2/dashboards"
 | 自动重试 | `--idempotent`（需要幂等键） |
 | 快速连续请求 | `--rate-limit`、自适应限流 |
 | 本地缓存 | `--no-cache`、`--data-source live` |
-| 自动学习 | `--no-learn`、`WYN_CLI_NO_LEARN=true` |
+| 自动学习 | `--no-learn`、`MYCLI_NO_LEARN=true` |
 
 **判断标准**：这个能力出问题时，用户有没有一个开关能立刻关掉？
 

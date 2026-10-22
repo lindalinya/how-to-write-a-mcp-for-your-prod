@@ -9,9 +9,9 @@
 ### 1. 二进制体积
 
 ```
-wyn-cli.exe   28 MB
-wyn-mcp.exe   33 MB
-wynlauncher    9 MB
+mycli.exe   28 MB
+mymcp.exe   33 MB
+launcher    9 MB
 ```
 
 原因：Go 静态编译 + 321 个端点全量打包。
@@ -74,7 +74,7 @@ receipt
 
 ### 5. 明文凭证
 
-`~/.wyninstances.yml` 里 password 和 token 是明文。
+`~/.instances.yml` 里 password 和 token 是明文。
 
 **代价**：本机其它用户、备份同步、误提交都能泄露。
 
@@ -84,11 +84,11 @@ receipt
 
 ### 6. MCP 精选可能漏
 
-118 个工具之外的需求，只能靠 `wyn-cli_search` + `wyn-cli_execute` 兜底。
+118 个工具之外的需求，只能靠 `mycli_search` + `mycli_execute` 兜底。
 
 **代价**：AI 需要多两步才能完成冷门操作。
 
-**缓解**：兜底工具要好用（实测的 `wyn-cli_execute` 支持自动解析路径占位符）。
+**缓解**：兜底工具要好用（实测的 `mycli_execute` 支持自动解析路径占位符）。
 
 ---
 
@@ -277,7 +277,7 @@ if version < "9.10" { }   // "9.10" < "9.9"? 字符串比较会错
 exec.Command("sh", "-c", "recall '"+query+"'")
 
 // ✓
-exec.Command("wyn-cli", "recall", query)
+exec.Command("mycli", "recall", query)
 ```
 
 ---

@@ -37,7 +37,7 @@ client 不负责：
 {
   "mode": "bearer_token",
   "env_vars": [
-    {"name": "WYN_TOKEN", "kind": "per_call", "required": true, "sensitive": true}
+    {"name": "MYCLI_TOKEN", "kind": "per_call", "required": true, "sensitive": true}
   ]
 }
 ```
@@ -46,8 +46,8 @@ client 不负责：
 
 ```
 1. 显式参数（极少用）
-2. 环境变量（WYN_TOKEN）
-3. 配置文件（~/.wyninstances.yml 的 users[].token）
+2. 环境变量（MYCLI_TOKEN）
+3. 配置文件（~/.instances.yml 的 users[].token）
 4. 交互式提示（且只在 TTY 下）
 ```
 
@@ -76,8 +76,8 @@ func AtomicWritePrivateFile(path string, data []byte) error {
 - 启动时检测"占位符凭证"并给出可操作的错误（实测 `ErrPlaceholderCredential`）：
 
 ```
-Set it with: echo "$TOKEN" | wyn-cli auth set-token
-or export WYN_TOKEN="your-token-here"
+Set it with: echo "$TOKEN" | mycli auth set-token
+or export MYCLI_TOKEN="your-token-here"
 ```
 
 ---
@@ -86,7 +86,7 @@ or export WYN_TOKEN="your-token-here"
 
 ### 3.1 路径占位符
 
-MCP 里有一个 `wyn-cli_execute` 工具，说明是：
+MCP 里有一个 `mycli_execute` 工具，说明是：
 
 > Params are passed as a JSON object; path placeholders and query strings are resolved automatically.
 
@@ -191,7 +191,7 @@ func (p RetryPolicy) Delay(attempt int, resp *http.Response) time.Duration {
 - **应该**在拒绝使用过期缓存时给出可操作的提示：
 
 ```
-local store data is 3h old, older than --max-age=10m. Run 'wyn-cli sync' to refresh.
+local store data is 3h old, older than --max-age=10m. Run 'mycli sync' to refresh.
 ```
 
 - **禁止**缓存认证失败、限流响应。

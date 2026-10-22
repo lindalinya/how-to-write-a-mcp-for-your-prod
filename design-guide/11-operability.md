@@ -49,13 +49,13 @@
 
 ## 2. `doctor`：一条命令回答"能不能用"
 
-实测存在 `wyn-cli doctor --agent`。
+实测存在 `mycli doctor --agent`。
 
 建议自检内容：
 
 ```
 [配置]
-  ✓ 找到 ~/.wyninstances.yml
+  ✓ 找到 ~/.instances.yml
   ✓ 默认实例: local-dev (http://localhost:51980)
   ✗ 用户 admin 的 token 是占位符 → 怎么修
 [网络]
@@ -99,7 +99,7 @@
   "dry_run": true,
   "request": {
     "method": "POST",
-    "url": "https://wyn.example.com/api/v2/dashboards",
+    "url": "https://api.example.com/api/v2/dashboards",
     "headers": {"Authorization": "Bearer ***", "Content-Type": "application/json"},
     "body_bytes": 4821
   },
@@ -203,7 +203,7 @@ defer stop()
 
 - **必须**日志只写 stderr。
 - **必须**默认安静（成功时什么都不输出）。
-- **应该**支持 `WYN_CLI_DEBUG=1` 之类的环境变量开关。
+- **应该**支持 `MYCLI_DEBUG=1` 之类的环境变量开关。
 
 ### 7.2 回执（receipt）
 
@@ -213,7 +213,7 @@ defer stop()
 
 ```json
 {
-  "cli": "wyn-cli",
+  "cli": "mycli",
   "version": "0.2.32",
   "timestamp": "2026-10-22T08:00:00Z",
   "command": ["dashboards", "delete", "abc123"],
@@ -255,23 +255,23 @@ defer stop()
 
 ### 现象：命令报 404
 ```
-1. wyn-cli doctor            → 版本对不对
-2. wyn-cli --server-version 9.1 <cmd>  → 手动指定试试
+1. mycli doctor            → 版本对不对
+2. mycli --server-version 9.1 <cmd>  → 手动指定试试
 3. 检查端点是否被门控
 ```
 
 ### 现象：认证失败
 ```
-1. wyn-cli auth status
+1. mycli auth status
 2. 检查 token 是否是占位符
 3. 检查实例/用户是否选对
 ```
 
 ### 现象：数据不是最新的
 ```
-1. wyn-cli workflow status
+1. mycli workflow status
 2. 加 --data-source live 试试
-3. wyn-cli sync --full
+3. mycli sync --full
 ```
 
 ### 现象：被限流
@@ -285,7 +285,7 @@ defer stop()
 ```
 1. --timeout 2m
 2. 检查代理环境变量
-3. wyn-cli doctor
+3. mycli doctor
 ```
 
 **规范**：

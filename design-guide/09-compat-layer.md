@@ -29,7 +29,7 @@ CLI 支持 9.1 和 10.0
 
 `context` 工具返回：
 
-> Compatible with Wyn Enterprise 9.1 (312/319 endpoints available; 7 Wyn 10+ endpoints gated)
+> Compatible with v9.1 (312/319 endpoints available; 7 v10+ endpoints gated)
 
 信息量很大：
 
