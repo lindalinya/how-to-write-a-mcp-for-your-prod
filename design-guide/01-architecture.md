@@ -2,32 +2,7 @@
 
 ## 1. 三个出口，一个内核
 
-```
-                         ┌────────────────────────────┐
-                         │  规格层：321 个端点 + 注解   │
-                         └──────────────┬─────────────┘
-                                        │
-              ┌─────────────────────────┼─────────────────────────┐
-              │                         │                         │
-              ▼                         ▼                         ▼
-    ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-    │  mycli.exe     │    │  mymcp.exe     │    │  agent-context   │
-    │  524 个命令节点   │    │  118 个 MCP 工具  │    │  272KB JSON      │
-    │  人 / 脚本        │    │  AI 客户端        │    │  AI 首次接入      │
-    └────────┬─────────┘    └────────┬─────────┘    └────────┬─────────┘
-             │                       │                       │
-             └───────────────┬───────┴───────────────────────┘
-                             ▼
-                ┌────────────────────────────┐
-                │        共用的内部包          │
-                │  client / store / compat   │
-                │  config / learn / cliutil  │
-                └──────────────┬─────────────┘
-                               │
-                    ┌──────────┴──────────┐
-                    ▼                     ▼
-              Target REST API         本地 SQLite
-```
+![三出口 / 一内核](../assets/architecture.svg)
 
 **核心事实**（buildinfo 实测）：
 
@@ -81,78 +56,19 @@ cli  ──►  client / store / learn / compat / config / platform / cliutil
 
 以 `mycli dashboards list --agent` 为例：
 
-```
-1. 参数解析
-   cobra 路由到 internal/cli/dashboards_list
-   解析全局 flags：--instance / --server-version / --json ...
-
-2. 环境装配
-   config.Load()            读 ~/.instances.yml（找不到就 fallback）
-   cliutil.LoadCredentials  取 token（配置 / 环境变量 / 提示）
-   platform.Session         绑定 client-profile、租户身份
-
-3. 能力检查
-   compat.DetectServerVersion()   探测或读缓存 → 如 9.1
-   compat.GatedEndpoints()        过滤掉当前版本不支持的端点
-
-4. 数据来源决策
-   --data-source auto  → 本地缓存够新就本地，否则走网络
-   --data-source local → 只读 SQLite，不发请求
-   --data-source live  → 强制网络
-
-5. 请求构造
-   client.New()             注入认证头、超时、限流器
-   替换路径占位符 /api/xxx/{id}
-   编码 query string / multipart / form
-
-6. 发送与重试
-   失败 → 按 Retry-After 或退避重试
-   429  → AdaptiveLimiter.Wait() 记录并降速
-   重定向 → 白名单校验
-
-7. 结果处理
-   分页自动跟随（除非 --no-paginate）
-   部分失败 → 按 --allow-partial-failure / --strict 决定
-
-8. 落地
-   写入 store（如果该资源被同步）
-   写 learn_events（如果 learn 开启）
-   生成 receipt（如果 --receipt）
-
-9. 输出
-   选择格式 → 选择字段 → 选择目的地
-```
+![请求生命周期](../assets/request-lifecycle.svg)
 
 ---
 
 ## 4. 三条数据流必须分清
 
-这是最容易设计混乱的地方。
+![三条数据流](../assets/data-flows.svg)
 
-### 流 A：实时读（live）
+三条路径的适用场景：
 
-```
-命令 → client → HTTP → 格式化 → 输出
-不经过 store
-```
-
-适用：要最新数据、一次性查询。
-
-### 流 B：镜像读（local）
-
-```
-sync  → client → HTTP → store（resources + fts）
-命令  → store → 格式化 → 输出
-```
-
-适用：离线、批量分析、全文搜索。
-
-### 流 C：写入（mutate）
-
-```
-命令 → client → HTTP → 服务器
-                  └─► 成功后可选刷新 store
-```
+- **A 实时读**：要最新数据、一次性查询。
+- **B 镜像读**：离线、批量分析、全文搜索。
+- **C 写入**：创建、更新、删除。
 
 **规范**：
 

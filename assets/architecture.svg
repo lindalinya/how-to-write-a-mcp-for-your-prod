@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="specGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+    <linearGradient id="coreGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="720" fill="#ffffff"/>
+
+  <!-- 标题 -->
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">三出口 / 一内核</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">同一份端点规格，生成三种消费者界面</text>
+
+  <!-- 规格层 -->
+  <rect x="330" y="92" width="340" height="76" rx="12" fill="url(#specGrad)" stroke="#3b82f6" stroke-width="1.6" filter="url(#shadow)"/>
+  <text x="500" y="122" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">规格层</text>
+  <text x="500" y="144" text-anchor="middle" font-size="12.5" fill="#334155">321 个端点 · 方法 · 路径 · 注解</text>
+
+  <!-- 连接：规格 → 三个出口 -->
+  <path d="M 500 168 L 500 196" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 170 196 L 830 196" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 170 196 L 170 232" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 500 196 L 500 232" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 830 196 L 830 232" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 三个出口 -->
+  <!-- CLI -->
+  <rect x="45" y="236" width="250" height="126" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4" filter="url(#shadow)"/>
+  <rect x="45" y="236" width="250" height="5" rx="2.5" fill="#2563eb"/>
+  <text x="170" y="266" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">mycli</text>
+  <text x="170" y="292" text-anchor="middle" font-size="12.5" fill="#334155">524 个命令节点</text>
+  <text x="170" y="314" text-anchor="middle" font-size="12.5" fill="#64748b">人 / 脚本</text>
+  <text x="170" y="340" text-anchor="middle" font-size="11.5" fill="#94a3b8">cobra + pflag</text>
+
+  <!-- MCP -->
+  <rect x="375" y="236" width="250" height="126" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4" filter="url(#shadow)"/>
+  <rect x="375" y="236" width="250" height="5" rx="2.5" fill="#7c3aed"/>
+  <text x="500" y="266" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">mymcp</text>
+  <text x="500" y="292" text-anchor="middle" font-size="12.5" fill="#334155">118 个 MCP 工具</text>
+  <text x="500" y="314" text-anchor="middle" font-size="12.5" fill="#64748b">AI 客户端</text>
+  <text x="500" y="340" text-anchor="middle" font-size="11.5" fill="#94a3b8">stdio / streamable HTTP</text>
+
+  <!-- agent-context -->
+  <rect x="705" y="236" width="250" height="126" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4" filter="url(#shadow)"/>
+  <rect x="705" y="236" width="250" height="5" rx="2.5" fill="#059669"/>
+  <text x="830" y="266" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">agent-context</text>
+  <text x="830" y="292" text-anchor="middle" font-size="12.5" fill="#334155">272KB JSON 说明书</text>
+  <text x="830" y="314" text-anchor="middle" font-size="12.5" fill="#64748b">AI 首次接入</text>
+  <text x="830" y="340" text-anchor="middle" font-size="11.5" fill="#94a3b8">命令树 + 协议 + 环境</text>
+
+  <!-- 连接：三个出口 → 内核 -->
+  <path d="M 170 362 L 170 402" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 500 362 L 500 402" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 830 362 L 830 402" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 170 402 L 830 402" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 500 402 L 500 430" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 共用内核 -->
+  <rect x="290" y="434" width="420" height="132" rx="12" fill="url(#coreGrad)" stroke="#94a3b8" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="500" y="466" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">共用的内部包</text>
+  <g font-size="12.5" fill="#334155" text-anchor="middle">
+    <text x="500" y="494">client · store · compat</text>
+    <text x="500" y="518">config · learn · platform · cliutil</text>
+  </g>
+  <text x="500" y="546" text-anchor="middle" font-size="11.5" fill="#94a3b8">依赖方向单向：上层可调下层，反向禁止</text>
+
+  <!-- 连接：内核 → 两个后端 -->
+  <path d="M 500 566 L 500 600" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 300 600 L 700 600" stroke="#64748b" stroke-width="1.6" fill="none"/>
+  <path d="M 300 600 L 300 632" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 700 600 L 700 632" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- 后端 -->
+  <rect x="190" y="636" width="220" height="56" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="300" y="670" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0f172a">Target REST API</text>
+
+  <rect x="590" y="636" width="220" height="56" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="700" y="670" text-anchor="middle" font-size="13.5" font-weight="600" fill="#0f172a">本地 SQLite</text>
+</svg>

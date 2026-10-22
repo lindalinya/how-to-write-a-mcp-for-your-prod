@@ -242,21 +242,7 @@ CREATE TABLE learn_candidates (
 
 ### 5.2 状态机
 
-```
-        自动观察到一次
-               │
-               ▼
-          ┌─────────┐
-          │  open   │◄──────────────┐
-          └────┬────┘               │ 再次出现
-               │                    │ (sightings+1)
-      ┌────────┼────────┐           │
-      ▼        ▼        ▼           │
- confirm   reject   超时未出现   ┌───┴────┐
-      │        │        │        │expired │
-      ▼        ▼        └───────►└────────┘
-  写入正式表  墓碑
-```
+![候选生命周期](../assets/learning-candidates.svg)
 
 关键 SQL（实测）：
 

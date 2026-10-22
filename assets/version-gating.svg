@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <filter id="s7" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="600" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">版本门控：在注册阶段就隐藏</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">不支持的端点不应该「存在但报错」</text>
+
+  <!-- 版本探测 -->
+  <rect x="40" y="100" width="250" height="270" rx="14" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4" filter="url(#s7)"/>
+  <text x="165" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">版本探测（按优先级）</text>
+
+  <g font-size="11.5">
+    <rect x="60" y="146" width="210" height="34" rx="7" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="74" y="168" fill="#1e40af">① --server-version 手动指定</text>
+
+    <rect x="60" y="188" width="210" height="34" rx="7" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="74" y="210" fill="#1e40af">② 配置文件里的 version</text>
+
+    <rect x="60" y="230" width="210" height="34" rx="7" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="74" y="252" fill="#1e40af">③ 缓存（未过期）</text>
+
+    <rect x="60" y="272" width="210" height="76" rx="7" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="74" y="294" fill="#1e40af">④ 主动探测</text>
+    <text x="74" y="314" fill="#64748b">· 静态资源指纹</text>
+    <text x="74" y="332" fill="#64748b">· 响应体 / 响应头版本串</text>
+  </g>
+
+  <path d="M 290 235 L 348 235" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a7)"/>
+
+  <!-- 过滤 -->
+  <rect x="352" y="170" width="210" height="130" rx="14" fill="#1e293b" stroke="#0f172a" stroke-width="1.4" filter="url(#s7)"/>
+  <text x="457" y="202" text-anchor="middle" font-size="14" font-weight="700" fill="#f8fafc">端点集过滤</text>
+  <text x="457" y="228" text-anchor="middle" font-size="11.5" fill="#cbd5e1">min_version ≤ 服务器版本</text>
+  <text x="457" y="252" text-anchor="middle" font-size="11.5" fill="#94a3b8">319 个端点 → 312 可用</text>
+  <text x="457" y="276" text-anchor="middle" font-size="11.5" fill="#fca5a5">7 个 v10+ 端点被隐藏</text>
+
+  <path d="M 562 235 L 620 235" stroke="#64748b" stroke-width="1.8" fill="none"/>
+  <path d="M 620 235 L 620 120" stroke="#64748b" stroke-width="1.8" fill="none"/>
+  <path d="M 620 235 L 620 350" stroke="#64748b" stroke-width="1.8" fill="none"/>
+  <path d="M 620 120 L 668 120" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a7)"/>
+  <path d="M 620 235 L 668 235" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a7)"/>
+  <path d="M 620 350 L 668 350" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a7)"/>
+
+  <!-- 三处注册 -->
+  <g filter="url(#s7)">
+    <rect x="672" y="92" width="280" height="56" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+    <rect x="672" y="207" width="280" height="56" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+    <rect x="672" y="322" width="280" height="56" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+  </g>
+  <rect x="672" y="92" width="5" height="56" rx="2.5" fill="#2563eb"/>
+  <rect x="672" y="207" width="5" height="56" rx="2.5" fill="#7c3aed"/>
+  <rect x="672" y="322" width="5" height="56" rx="2.5" fill="#059669"/>
+  <g font-size="12.5" font-weight="600" fill="#0f172a">
+    <text x="694" y="117">CLI：不注册命令</text>
+    <text x="694" y="232">MCP：不列出工具</text>
+    <text x="694" y="347">context：不进 tool_surface</text>
+  </g>
+  <g font-size="11" fill="#64748b">
+    <text x="694" y="136">补全里也看不到</text>
+    <text x="694" y="251">AI 不会尝试调用</text>
+    <text x="694" y="366">三处必须是同一份结果</text>
+  </g>
+
+  <!-- 保守模式 -->
+  <rect x="40" y="424" width="912" height="70" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.3"/>
+  <text x="64" y="452" font-size="13" font-weight="700" fill="#991b1b">探测全部失败时 → 保守模式</text>
+  <text x="64" y="476" font-size="11.5" fill="#b91c1c">只开放最低支持版本的端点；明确告知用户；提供 --server-version 手动解锁</text>
+
+  <!-- 原则 -->
+  <text x="500" y="550" text-anchor="middle" font-size="12.5" fill="#64748b">原则：宁可不给，也不要给了调不通</text>
+</svg>

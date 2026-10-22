@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <marker id="a6g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="a6r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+    <filter id="s6" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="660" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">学习候选的生命周期</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">自动观察到的知识，必须先隔离</text>
+
+  <!-- 观察 -->
+  <rect x="70" y="250" width="150" height="70" rx="12" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" filter="url(#s6)"/>
+  <text x="145" y="282" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">自动观察</text>
+  <text x="145" y="304" text-anchor="middle" font-size="10.5" fill="#64748b">调用 / 追问 / 路径</text>
+
+  <!-- open -->
+  <rect x="330" y="244" width="180" height="82" rx="14" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.8" filter="url(#s6)"/>
+  <text x="420" y="276" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">open</text>
+  <text x="420" y="298" text-anchor="middle" font-size="11.5" fill="#b45309">隔离区 · 不影响任何行为</text>
+  <text x="420" y="316" text-anchor="middle" font-size="11" fill="#a16207">sightings 累加</text>
+
+  <!-- confirmed -->
+  <rect x="690" y="120" width="190" height="76" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" filter="url(#s6)"/>
+  <text x="785" y="150" text-anchor="middle" font-size="14.5" font-weight="700" fill="#14532d">confirmed</text>
+  <text x="785" y="172" text-anchor="middle" font-size="11.5" fill="#16a34a">写入正式表 · 开始生效</text>
+
+  <!-- rejected -->
+  <rect x="690" y="400" width="190" height="76" rx="14" fill="#fef2f2" stroke="#dc2626" stroke-width="1.8" filter="url(#s6)"/>
+  <text x="785" y="430" text-anchor="middle" font-size="14.5" font-weight="700" fill="#7f1d1d">rejected</text>
+  <text x="785" y="452" text-anchor="middle" font-size="11.5" fill="#dc2626">墓碑 · 同签名永不再提</text>
+
+  <!-- expired -->
+  <rect x="330" y="430" width="180" height="76" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" filter="url(#s6)"/>
+  <text x="420" y="460" text-anchor="middle" font-size="14.5" font-weight="700" fill="#334155">expired</text>
+  <text x="420" y="482" text-anchor="middle" font-size="11.5" fill="#64748b">长期未出现</text>
+
+  <!-- 箭头 -->
+  <path d="M 220 285 L 322 285" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a6)"/>
+  <text x="271" y="275" text-anchor="middle" font-size="11" fill="#64748b">首次出现</text>
+
+  <path d="M 510 262 L 682 178" stroke="#16a34a" stroke-width="1.8" fill="none" marker-end="url(#a6g)"/>
+  <text x="600" y="205" text-anchor="middle" font-size="11" fill="#16a34a" stroke="#ffffff" stroke-width="4" paint-order="stroke fill">显式 confirm</text>
+
+  <path d="M 510 316 L 682 404" stroke="#dc2626" stroke-width="1.8" fill="none" marker-end="url(#a6r)"/>
+  <text x="600" y="380" text-anchor="middle" font-size="11" fill="#dc2626" stroke="#ffffff" stroke-width="4" paint-order="stroke fill">显式 reject</text>
+
+  <path d="M 420 326 L 420 422" stroke="#94a3b8" stroke-width="1.8" fill="none" marker-end="url(#a6)"/>
+  <text x="470" y="380" font-size="11" fill="#94a3b8">超时未再出现</text>
+
+  <!-- 复活 -->
+  <path d="M 330 468 L 238 468 L 238 300 L 322 300" stroke="#f59e0b" stroke-width="1.8" fill="none" stroke-dasharray="6 4" marker-end="url(#a6)"/>
+  <text x="236" y="496" font-size="10.5" fill="#b45309">再次出现 → 复活</text>
+
+  <!-- 右侧说明 -->
+  <rect x="700" y="228" width="250" height="140" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2"/>
+  <text x="722" y="256" font-size="12.5" font-weight="700" fill="#1e3a8a">关键约束</text>
+  <g font-size="11.5" fill="#334155">
+    <text x="722" y="282">derivation_signature 唯一</text>
+    <text x="722" y="304">重复出现只加 sightings</text>
+    <text x="722" y="326">rejected 是永久墓碑</text>
+    <text x="722" y="348">expired 可被重新激活</text>
+  </g>
+
+  <!-- 底部结论 -->
+  <rect x="120" y="552" width="760" height="66" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.2"/>
+  <text x="500" y="580" text-anchor="middle" font-size="12.5" font-weight="600" fill="#92400e">候选在被显式确认之前，不会改变任何行为，也不会污染召回的已验证结果</text>
+  <text x="500" y="602" text-anchor="middle" font-size="11.5" fill="#a16207">这是防止 AI「越用越错」的核心闸门</text>
+</svg>

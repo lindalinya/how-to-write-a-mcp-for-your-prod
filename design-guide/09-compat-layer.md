@@ -154,19 +154,7 @@ compat:
 
 ## 5. 门控发生在什么阶段
 
-```
-规格加载
-   │
-   ▼
-探测版本（缓存）
-   │
-   ▼
-过滤端点集  ◄── GatedEndpoints / GatedPaths
-   │
-   ├──► 注册 CLI 命令（不支持的直接不注册）
-   ├──► 注册 MCP 工具（不支持的直接不列）
-   └──► 生成 agent-context（tool_surface 只含可用的）
-```
+![版本门控流程](../assets/version-gating.svg)
 
 **规范**：
 

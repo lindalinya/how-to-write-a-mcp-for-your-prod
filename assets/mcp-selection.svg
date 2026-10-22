@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <filter id="s5" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="funnel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#ede9fe"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="720" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">从 321 个端点到 118 个工具</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">给 AI 的接口要做减法</text>
+
+  <!-- 左：321 -->
+  <rect x="50" y="92" width="180" height="120" rx="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.6" filter="url(#s5)"/>
+  <text x="140" y="140" text-anchor="middle" font-size="34" font-weight="800" fill="#1e3a8a">321</text>
+  <text x="140" y="168" text-anchor="middle" font-size="12.5" fill="#3b82f6">CLI 端点</text>
+  <text x="140" y="192" text-anchor="middle" font-size="10.5" fill="#64748b">GET 130 · POST 117</text>
+  <text x="140" y="206" text-anchor="middle" font-size="10.5" fill="#64748b">PUT 48 · DELETE 26</text>
+
+  <path d="M 230 152 L 300 152" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#a5)"/>
+
+  <!-- 中：筛选 -->
+  <rect x="304" y="86" width="300" height="136" rx="14" fill="url(#funnel)" stroke="#a5b4fc" stroke-width="1.4" filter="url(#s5)"/>
+  <text x="454" y="114" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3730a3">三道筛选</text>
+  <g font-size="12" fill="#312e81">
+    <text x="322" y="140">① 保留能独立完成一件事的操作</text>
+    <text x="322" y="164">② 砍掉底层配置与碎片化接口</text>
+    <text x="322" y="188">③ 只读查询优先</text>
+  </g>
+
+  <path d="M 604 152 L 674 152" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#a5)"/>
+
+  <!-- 右：118 -->
+  <rect x="678" y="92" width="180" height="120" rx="14" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6" filter="url(#s5)"/>
+  <text x="768" y="140" text-anchor="middle" font-size="34" font-weight="800" fill="#4c1d95">118</text>
+  <text x="768" y="168" text-anchor="middle" font-size="12.5" fill="#7c3aed">MCP 工具</text>
+  <text x="768" y="192" text-anchor="middle" font-size="11.5" fill="#64748b">55 个零必填 · 62 个仅 1 个必填</text>
+
+  <!-- 分组条形图 -->
+  <text x="60" y="270" font-size="14.5" font-weight="700" fill="#0f172a">工具分布（按分组）</text>
+
+  <!-- 用条形图，最大 33 对应 520px -->
+  <g font-size="12" fill="#334155">
+    <text x="60" y="306">resources</text>
+    <rect x="190" y="294" width="520" height="18" rx="4" fill="#3b82f6"/>
+    <text x="720" y="308" font-size="11.5" fill="#64748b">33</text>
+
+    <text x="60" y="340">datasets</text>
+    <rect x="190" y="328" width="221" height="18" rx="4" fill="#6366f1"/>
+    <text x="421" y="342" font-size="11.5" fill="#64748b">14</text>
+
+    <text x="60" y="374">datasources</text>
+    <rect x="190" y="362" width="173" height="18" rx="4" fill="#8b5cf6"/>
+    <text x="373" y="376" font-size="11.5" fill="#64748b">11</text>
+
+    <text x="60" y="408">spreadsheets</text>
+    <rect x="190" y="396" width="173" height="18" rx="4" fill="#a855f7"/>
+    <text x="373" y="410" font-size="11.5" fill="#64748b">11</text>
+
+    <text x="60" y="442">reports</text>
+    <rect x="190" y="430" width="110" height="18" rx="4" fill="#d946ef"/>
+    <text x="310" y="444" font-size="11.5" fill="#64748b">7</text>
+
+    <text x="60" y="476">learnings</text>
+    <rect x="190" y="464" width="95" height="18" rx="4" fill="#ec4899"/>
+    <text x="295" y="478" font-size="11.5" fill="#64748b">6</text>
+
+    <text x="60" y="510">dashboards</text>
+    <rect x="190" y="498" width="79" height="18" rx="4" fill="#f43f5e"/>
+    <text x="279" y="512" font-size="11.5" fill="#64748b">5</text>
+
+    <text x="60" y="544">instance</text>
+    <rect x="190" y="532" width="79" height="18" rx="4" fill="#fb7185"/>
+    <text x="279" y="546" font-size="11.5" fill="#64748b">5</text>
+
+    <text x="60" y="578">languages</text>
+    <rect x="190" y="566" width="63" height="18" rx="4" fill="#f97316"/>
+    <text x="263" y="580" font-size="11.5" fill="#64748b">4</text>
+
+    <text x="60" y="612">teach</text>
+    <rect x="190" y="600" width="63" height="18" rx="4" fill="#f59e0b"/>
+    <text x="263" y="614" font-size="11.5" fill="#64748b">4</text>
+
+    <text x="60" y="646">其余</text>
+    <rect x="190" y="634" width="347" height="18" rx="4" fill="#94a3b8"/>
+    <text x="547" y="648" font-size="11.5" fill="#64748b">22</text>
+  </g>
+
+  <!-- 对比说明 -->
+  <rect x="760" y="286" width="200" height="180" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.2"/>
+  <text x="780" y="314" font-size="12.5" font-weight="700" fill="#0f172a">被砍掉的典型</text>
+  <g font-size="11.5" fill="#64748b">
+    <text x="780" y="340">organizations 32 个</text>
+    <text x="780" y="362">users 30 个</text>
+    <text x="780" y="384">sysconfig 21 个</text>
+  </g>
+  <text x="780" y="414" font-size="11" fill="#94a3b8">管理类端点对构建任务</text>
+  <text x="780" y="432" font-size="11" fill="#94a3b8">没有直接价值</text>
+  <text x="780" y="454" font-size="11" fill="#94a3b8">冷门需求走逃生口</text>
+</svg>

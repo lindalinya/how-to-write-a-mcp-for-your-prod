@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="800" viewBox="0 0 1000 800" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="s3" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="line" gradientUnits="userSpaceOnUse" x1="120" y1="96" x2="120" y2="756">
+      <stop offset="0%" stop-color="#93c5fd"/>
+      <stop offset="100%" stop-color="#c4b5fd"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="800" fill="#ffffff"/>
+  <text x="500" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#0f172a">一次命令请求的完整生命周期</text>
+  <text x="500" y="58" text-anchor="middle" font-size="13" fill="#64748b">以 list 类只读命令为例</text>
+
+  <!-- 主竖线 -->
+  <line x1="120" y1="96" x2="120" y2="756" stroke="url(#line)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- 9 步 -->
+  <g>
+    <!-- 1 -->
+    <circle cx="120" cy="110" r="16" fill="#2563eb"/>
+    <text x="120" y="115" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">1</text>
+    <text x="156" y="108" font-size="14.5" font-weight="700" fill="#0f172a">参数解析</text>
+    <text x="156" y="130" font-size="12.5" fill="#475569">cobra 路由到叶子命令 → 解析全局 flags（instance / json / dry-run …）</text>
+
+    <!-- 2 -->
+    <circle cx="120" cy="190" r="16" fill="#2563eb"/>
+    <text x="120" y="195" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">2</text>
+    <text x="156" y="188" font-size="14.5" font-weight="700" fill="#0f172a">环境装配</text>
+    <text x="156" y="210" font-size="12.5" fill="#475569">读配置 → 取凭证（文件 / 环境变量 / 提示）→ 绑定 client-profile 与租户身份</text>
+
+    <!-- 3 -->
+    <circle cx="120" cy="270" r="16" fill="#2563eb"/>
+    <text x="120" y="275" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">3</text>
+    <text x="156" y="268" font-size="14.5" font-weight="700" fill="#0f172a">能力检查</text>
+    <text x="156" y="290" font-size="12.5" fill="#475569">探测或读取服务器版本 → 过滤掉当前版本不支持的端点</text>
+
+    <!-- 4 -->
+    <circle cx="120" cy="350" r="16" fill="#7c3aed"/>
+    <text x="120" y="355" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">4</text>
+    <text x="156" y="348" font-size="14.5" font-weight="700" fill="#0f172a">数据来源决策</text>
+    <text x="156" y="370" font-size="12.5" fill="#475569">--data-source auto：本地够新就本地，否则走网络；local 只读库；live 强制网络</text>
+
+    <!-- 5 -->
+    <circle cx="120" cy="430" r="16" fill="#7c3aed"/>
+    <text x="120" y="435" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">5</text>
+    <text x="156" y="428" font-size="14.5" font-weight="700" fill="#0f172a">请求构造</text>
+    <text x="156" y="450" font-size="12.5" fill="#475569">注入认证头 → 替换路径占位符 → 编码 query / JSON / multipart</text>
+
+    <!-- 6 -->
+    <circle cx="120" cy="510" r="16" fill="#d97706"/>
+    <text x="120" y="515" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">6</text>
+    <text x="156" y="508" font-size="14.5" font-weight="700" fill="#0f172a">发送与重试</text>
+    <text x="156" y="530" font-size="12.5" fill="#475569">限流等待 → 条件请求（ETag）→ 429/5xx 退避重试 → 重定向白名单校验</text>
+
+    <!-- 7 -->
+    <circle cx="120" cy="590" r="16" fill="#d97706"/>
+    <text x="120" y="595" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">7</text>
+    <text x="156" y="588" font-size="14.5" font-weight="700" fill="#0f172a">结果处理</text>
+    <text x="156" y="610" font-size="12.5" fill="#475569">解密 / 解压（带上限）→ 自动翻页 → 部分失败按 --strict 判定</text>
+
+    <!-- 8 -->
+    <circle cx="120" cy="670" r="16" fill="#059669"/>
+    <text x="120" y="675" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">8</text>
+    <text x="156" y="668" font-size="14.5" font-weight="700" fill="#0f172a">落地</text>
+    <text x="156" y="690" font-size="12.5" fill="#475569">写本地镜像 / 记 learn_events / 生成 receipt（均可关闭）</text>
+
+    <!-- 9 -->
+    <circle cx="120" cy="750" r="16" fill="#059669"/>
+    <text x="120" y="755" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">9</text>
+    <text x="156" y="748" font-size="14.5" font-weight="700" fill="#0f172a">输出</text>
+    <text x="156" y="770" font-size="12.5" fill="#475569">字段投影（select / compact）→ 渲染（table / json / csv）→ 投递（stdout / file / webhook）</text>
+  </g>
+</svg>
